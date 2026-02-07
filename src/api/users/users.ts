@@ -19,9 +19,8 @@ export async function fetchUsers(params?: ListParams): Promise<ApiResult<Person[
       return fail(apiError);
     }
 
-    return null;
-    // return fail({
-    //   message: "Unexpected error",
-    // });
+    return fail({
+      message: "Unexpected error",
+    });
   }
 }
