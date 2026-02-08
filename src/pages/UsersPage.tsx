@@ -29,9 +29,7 @@ export function UsersPage() {
         const q = searchKey.trim();
         return fetchUsers({ _start: start, _limit: pageSize, q: q || undefined }).then(
             (result) => {
-                console.log("111");
                 if (!q || result.error || !result.data) return result;
-                console.log("result: ", result);
 
                 const term = q.toLowerCase();
                 const filtered = result.data.filter((user) => {
