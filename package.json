@@ -13,7 +13,9 @@
     "test:ci": "vitest run"
   },
   "dependencies": {
+    "@tanstack/react-virtual": "^3.13.12",
     "axios": "^1.13.4",
+    "antd": "^5.27.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
