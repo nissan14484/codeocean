@@ -1,54 +1,65 @@
-# React + TypeScript + Vite
+# CodeOcean FE Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript app for the FE challenge. It renders a virtualized, lazy-loaded table and supports search by name or email.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React + TypeScript
+- Vite
+- Ant Design (dark theme)
+- Virtualized table with lazy loading
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node 20.19.0
+- npm
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Mock Server (json-server)
+
+This project expects the mock API from `fechallenge` to be running on port `3001`.
+
+### Required json-server version
+
+The mock repo uses `json-server@1.0.0-beta.3`, but filtering behaves inconsistently. Downgrade to the stable version:
+
+```bash
+npm install json-server@0.17.4
+npm start
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Run the App
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
+npm run dev
 ```
+
+The app expects:
+
+- `http://localhost:3001/users`
+- `http://localhost:3001/reviewers`
+
+## Search
+
+Search is handled by sending `q` to the server and then applying a local filter to ensure matches are in:
+
+- `firstName`
+- `lastName`
+- `email`
+
+## Tests
+
+```bash
+npm run test
+```
+
+CI-style run:
+
+```bash
+npm run test:ci
+```
+
+## Notes
+
+- Lazy loading fetches in pages of 100 rows.
+- Search input is debounced to avoid excessive calls.
