@@ -33,7 +33,7 @@ export function fail<T>(error: ApiError): ApiResult<T> {
 }
 
 export type ListParams = {
-  q?: string;
-  _page?: number;
-  _limit?: number;
+    q?: string;
+    _limit?: number;
+    _start?: number;
 };

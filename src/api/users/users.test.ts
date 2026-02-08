@@ -24,10 +24,10 @@ describe("fetchUsers", () => {
 
     vi.mocked(call).mockResolvedValue({ data: sample } as { data: Person[] });
 
-    const result = await fetchUsers({ _page: 1, _limit: 10 });
+    const result = await fetchUsers({ _start: 0, _limit: 10 });
 
     expect(result).toEqual({ data: sample, error: null });
-    expect(call).toHaveBeenCalledWith("/users", { _page: 1, _limit: 10 });
+    expect(call).toHaveBeenCalledWith("/users", { _start: 0, _limit: 10 });
   });
 
   it("returns mapped axios error", async () => {
